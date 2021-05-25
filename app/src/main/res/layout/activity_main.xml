@@ -7,19 +7,50 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/mainToolbar"-->
+<!--    <androidx.drawerlayout.widget.DrawerLayout-->
+<!--        xmlns:android="https://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:id="@+id/drawer_layout"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/blue"-->
-<!--        android:minHeight="?attr/actionBarSize"-->
-<!--        android:theme="?attr/actionBarTheme"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:title="@string/app_name"-->
-<!--        app:titleTextColor="@color/white"/>-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:openDrawer="start">-->
 
+<!--        <include-->
+<!--            layout="@layout/app_bar_main"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+
+<!--        <com.google.android.material.navigation.NavigationView-->
+<!--            android:id="@+id/nav_view"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="start"-->
+<!--            app:headerLayout="@layout/nav_header_main"-->
+<!--            app:menu="@menu/activity_main_drawer" />-->
+
+<!--    </androidx.drawerlayout.widget.DrawerLayout>-->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Tasks Due"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
