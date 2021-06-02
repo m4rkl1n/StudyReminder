@@ -1,6 +1,7 @@
 package com.example.studyreminder;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     myDatabase myDB;
     ArrayList<String> task_id, task_subject, task_description, task_due_date;
+    CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +46,23 @@ public class MainActivity extends AppCompatActivity {
 
         storeDataArray();
 
+        customAdapter = new CustomAdapter(MainActivity.this, task_subject, task_description, task_due_date);
+        recyclerView.setAdapter(customAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
             }
     void storeDataArray(){
         Cursor cursor = myDB.readAllData();
-        if(cursor.getCount() ==0 ){
+        if(cursor.getCount() == 0 ){
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }else{
             while (cursor.moveToNext()) {
-                task_subject.add(cursor.getString(0));
-                task_description.add(cursor.getString(1));
-                task_due_date.add(cursor.getString(2));
+                task_subject.add(cursor.getString(1));
+                task_description.add(cursor.getString(2));
+                task_due_date.add(cursor.getString(3));
             }
         }
     }
+
 
 }

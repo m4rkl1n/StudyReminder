@@ -72,7 +72,7 @@ public class myDatabase extends SQLiteOpenHelper {
 
         Cursor cursor = null;
         if(db !=null){
-            db.rawQuery(query, null);
+            cursor = db.rawQuery(query, null);
         }
         return cursor;
     }
