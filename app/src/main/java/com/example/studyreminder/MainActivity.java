@@ -50,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
-            }
-    void storeDataArray(){
+    }
+
+    void storeDataArray() {
         Cursor cursor = myDB.readAllData();
-        if(cursor.getCount() == 0 ){
+        if (cursor.getCount() == 0) {
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             while (cursor.moveToNext()) {
                 task_subject.add(cursor.getString(1));
                 task_description.add(cursor.getString(2));
