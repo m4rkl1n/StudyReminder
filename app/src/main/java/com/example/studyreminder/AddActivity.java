@@ -25,6 +25,8 @@ public class AddActivity extends AppCompatActivity {
             myDB.addTask(subjectEntry.getText().toString().trim(),
                     descEntry.getText().toString().trim(),
                     Integer.valueOf(dateEntry.getText().toString().trim()));
+
+
         });
     }
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FloatingActionButton newTaskBtn;
+    TextView toAdd;
+    TextView pressPlus;
 
     myDatabase myDB;
     ArrayList<String> task_id, task_subject, task_description, task_due_date;
@@ -54,16 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
     void storeDataArray() {
         Cursor cursor = myDB.readAllData();
-        if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
-        } else {
+        if (cursor.getCount() != 0) {
             while (cursor.moveToNext()) {
                 task_subject.add(cursor.getString(1));
                 task_description.add(cursor.getString(2));
                 task_due_date.add(cursor.getString(3));
+                toAdd = findViewById(R.id.toAdd);
+                pressPlus = findViewById(R.id.pressPlus);
+                if (toAdd.isShown() == true){
+                    toAdd.setVisibility(View.GONE);
+                    pressPlus.setVisibility(View.GONE);
+                    }
+
+                }
             }
         }
     }
-
-
-}

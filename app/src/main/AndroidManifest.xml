@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyReminder">
-        <activity android:name=".AddActivity"
+        <activity android:name=".UpdateActivity"></activity>
+        <activity
+            android:name=".AddActivity"
             android:label="@string/addTask"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
