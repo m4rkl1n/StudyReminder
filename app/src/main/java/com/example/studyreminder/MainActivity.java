@@ -57,19 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
     void storeDataArray() {
         Cursor cursor = myDB.readAllData();
-        if (cursor.getCount() != 0) {
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
+
+        } else {
             while (cursor.moveToNext()) {
                 task_subject.add(cursor.getString(1));
                 task_description.add(cursor.getString(2));
                 task_due_date.add(cursor.getString(3));
-                toAdd = findViewById(R.id.toAdd);
-                pressPlus = findViewById(R.id.pressPlus);
-                if (toAdd.isShown() == true){
-                    toAdd.setVisibility(View.GONE);
-                    pressPlus.setVisibility(View.GONE);
-                    }
-
-                }
+//                if (toAdd.isShown() == true){
+//                    toAdd.setVisibility(View.INVISIBLE);
+//                    pressPlus.setVisibility(View.INVISIBLE  );
+//                    }
             }
         }
     }
+}

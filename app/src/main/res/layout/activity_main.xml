@@ -25,6 +25,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/blue"
+                app:layout_anchor="@+id/ToolBarMain"
+                app:layout_anchorGravity="center"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:title="Reminders"
+                app:titleTextColor="@color/white" />
+
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -34,6 +45,9 @@
             android:orientation="vertical"
             android:padding="10dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn"
@@ -47,43 +61,33 @@
             app:maxImageSize="30dp"
             app:tint="@color/white" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/blue"
-            app:layout_anchor="@+id/ToolBarMain"
-            app:layout_anchorGravity="center"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:title="Reminders"
-            app:titleTextColor="@color/white" />
+
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+<!--        <TextView-->
+<!--            android:id="@+id/toAdd"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:text="to add a new task"-->
 
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/pressPlus" />-->
 
-        <TextView
-            android:id="@+id/toAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="to add a new task"
-
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pressPlus" />
-
-        <TextView
-            android:id="@+id/pressPlus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Press the Plus button"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/pressPlus"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Press the Plus button"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
 

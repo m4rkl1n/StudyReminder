@@ -62,7 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
     public class myViewHolder extends RecyclerView.ViewHolder {
 
         TextView subject_txt, description_txt, due_date_txt;
-        ConstraintLayout mainLayout;
+        LinearLayout mainLayout;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
