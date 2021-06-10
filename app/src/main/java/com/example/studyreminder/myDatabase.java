@@ -14,7 +14,7 @@ public class myDatabase extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DB_name = "allTasks.db";
-    private static final int DB_version = 2;
+    private static final int DB_version = 3;
 
     private static final String TABLE_NAME = "my_tasks";
     private static final String COLUMN_ID = "_id";
@@ -52,11 +52,11 @@ public class myDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addTask(String title, String description, int dueDate){
+    void addTask(String subject, String description, Integer dueDate){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_TITLE, title);
+        cv.put(COLUMN_TITLE, subject);
         cv.put(COLUMN_DESCRIPTION, description);
         cv.put(COLUMN_DUE_DATE, dueDate);
         long result = db.insert(TABLE_NAME, null, cv);

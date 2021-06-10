@@ -21,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     FloatingActionButton newTaskBtn;
-    TextView toAdd;
-    TextView pressPlus;
-
     myDatabase myDB;
     ArrayList<String> task_id, task_subject, task_description, task_due_date;
     CustomAdapter customAdapter;
@@ -43,16 +40,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         myDB = new myDatabase(MainActivity.this);
+        task_id = new ArrayList<>();
         task_subject = new ArrayList<>();
         task_description = new ArrayList<>();
         task_due_date = new ArrayList<>();
 
         storeDataArray();
 
-        customAdapter = new CustomAdapter(MainActivity.this, task_subject, task_description, task_due_date);
+        customAdapter = new CustomAdapter(MainActivity.this, task_id, task_subject, task_description, task_due_date);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        storeDataArray();
     }
 
     void storeDataArray() {
@@ -62,13 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             while (cursor.moveToNext()) {
+                task_id.add(cursor.getString(0));
                 task_subject.add(cursor.getString(1));
                 task_description.add(cursor.getString(2));
                 task_due_date.add(cursor.getString(3));
-//                if (toAdd.isShown() == true){
-//                    toAdd.setVisibility(View.INVISIBLE);
-//                    pressPlus.setVisibility(View.INVISIBLE  );
-//                    }
             }
         }
     }

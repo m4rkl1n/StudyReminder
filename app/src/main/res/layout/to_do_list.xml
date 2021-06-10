@@ -20,29 +20,31 @@
             android:padding="12dp">
 
             <TextView
-                android:id="@+id/taskDescription"
+                android:id="@+id/taskDescription_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
                 android:text="Description"
-                android:textStyle="bold"
                 android:textSize="22dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/taskid_txt"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/taskSubject"
+                android:id="@+id/taskSubject_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="7dp"
                 android:text="@string/Subject"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/taskDescription"
-                app:layout_constraintTop_toBottomOf="@+id/taskDescription" />
+                app:layout_constraintStart_toStartOf="@+id/taskDescription_txt"
+                app:layout_constraintTop_toBottomOf="@+id/taskDescription_txt" />
 
             <TextView
-                android:id="@+id/taskDate"
+                android:id="@+id/taskDate_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
@@ -51,6 +53,17 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/taskid_txt"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="1dp"
+                android:textSize="13dp"
+                android:text="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

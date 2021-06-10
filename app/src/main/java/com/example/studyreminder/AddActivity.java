@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class AddActivity extends AppCompatActivity {
 
-    EditText subjectEntry, descEntry, dateEntry;
+    EditText descEntry, dateEntry;
+    Spinner subjectEntry;
     Button addBtn;
 
     @Override
@@ -22,7 +24,8 @@ public class AddActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.addbtn);
         addBtn.setOnClickListener(view -> {
             myDatabase myDB = new myDatabase(AddActivity.this);
-            myDB.addTask(subjectEntry.getText().toString().trim(),
+            String spinnerText = subjectEntry.getSelectedItem().toString();
+            myDB.addTask(spinnerText.trim(),
                     descEntry.getText().toString().trim(),
                     Integer.valueOf(dateEntry.getText().toString().trim()));
 

@@ -12,7 +12,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     EditText description_input, subject_input, dueDate_input;
     Button update_button;
-    String description, subject, due_date;
+    String id, description, subject, dueDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,23 +21,30 @@ public class UpdateActivity extends AppCompatActivity {
         subject_input = findViewById(R.id.subjectEntry2);
         dueDate_input = findViewById(R.id.dateEntry2);
         update_button = findViewById(R.id.addbtn2);
+
+        getAndSetIntentData();
+
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
-        getAndSetIntentData();
     }
     void getAndSetIntentData() {
-        if(getIntent().hasExtra("description") && getIntent().hasExtra("subject") && getIntent().hasExtra("due_date")){
+        if(getIntent().hasExtra("id")
+                && getIntent().hasExtra("description")
+                && getIntent().hasExtra("subject")
+                && getIntent().hasExtra("due_date")){
+            id = getIntent().getStringExtra("id");
             description = getIntent().getStringExtra("description");
             subject = getIntent().getStringExtra("subject");
-            due_date = getIntent().getStringExtra("due_date");
+            dueDate = getIntent().getStringExtra("dueDate");
+
 
             description_input.setText(description);
             subject_input.setText(subject);
-            dueDate_input.setText(due_date);
+            dueDate_input.setText(dueDate);
         }else{
             Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
         }

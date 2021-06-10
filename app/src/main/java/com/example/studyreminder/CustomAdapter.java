@@ -1,7 +1,9 @@
 package com.example.studyreminder;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +20,14 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHolder> {
 
     private Context context;
-    private ArrayList task_subject, task_description, task_due_date;
+    private Activity activity;
+    private ArrayList task_id, task_subject, task_description, task_due_date;
     private int position;
 
-    CustomAdapter(Context context, ArrayList task_subject, ArrayList task_description, ArrayList task_due_date){
+    CustomAdapter(Context context, ArrayList task_id, ArrayList task_subject, ArrayList task_description, ArrayList task_due_date){
+        this.activity = activity;
         this.context = context;
+        this.task_id = task_id;
         this.task_description = task_description;
         this.task_subject = task_subject;
         this.task_due_date = task_due_date;
@@ -34,41 +40,44 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
         View view = inflater.inflate(R.layout.to_do_list, parent, false);
         return new myViewHolder(view);
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        this.position = position;
+    public void onBindViewHolder(@NonNull myViewHolder holder, final int position) {
+        holder.taskid_txt.setText(String.valueOf(task_id.get(position)));
+        holder.taskSubject_txt.setText(String.valueOf(task_subject.get(position)));
+        holder.taskDescription_txt.setText(String.valueOf(task_description.get(position)));
+        holder.taskDate_txt.setText(String.valueOf(task_due_date.get(position)));
 
-        holder.subject_txt.setText(String.valueOf(task_subject.get(position)));
-        holder.description_txt.setText(String.valueOf(task_description.get(position)));
-        holder.due_date_txt.setText(String.valueOf(task_due_date.get(position)));
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UpdateActivity.class);
-                intent.putExtra("Description", String.valueOf(task_description.get(position)));
-                intent.putExtra("Subject", String.valueOf(task_subject.get(position)));
-                intent.putExtra("Due Date", String.valueOf(task_due_date.get(position)));
+                intent.putExtra("id", String.valueOf(task_id.get(position)));
+                intent.putExtra("description", String.valueOf(task_description.get(position)));
+                intent.putExtra("subject", String.valueOf(task_subject.get(position)));
+                intent.putExtra("dueDate", String.valueOf(task_due_date.get(position)));
                 context.startActivity(intent);
             }
         });
     }
 
+
     @Override
     public int getItemCount() {
-        return task_description.size();
+        return task_id.size();
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder {
 
-        TextView subject_txt, description_txt, due_date_txt;
+        TextView taskid_txt, taskSubject_txt, taskDescription_txt, taskDate_txt;
         LinearLayout mainLayout;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            subject_txt = itemView.findViewById(R.id.taskSubject);
-            description_txt = itemView.findViewById(R.id.taskDescription);
-            due_date_txt = itemView.findViewById(R.id.taskDate);
+            taskid_txt = itemView.findViewById(R.id.taskid_txt);
+            taskSubject_txt = itemView.findViewById(R.id.taskSubject_txt);
+            taskDescription_txt = itemView.findViewById(R.id.taskDescription_txt);
+            taskDate_txt = itemView.findViewById(R.id.taskDate_txt);
             mainLayout = itemView.findViewById(R.id.mainLayout);
 
         }

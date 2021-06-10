@@ -36,17 +36,14 @@
         app:layout_constraintTop_toBottomOf="@+id/dateEntry"
         />
 
-    <EditText
+    <Spinner
         android:id="@+id/subjectEntry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="312dp"
+        android:layout_height="57dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
         android:ems="10"
-        android:hint="@string/Subject"
-
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/dateEntry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
