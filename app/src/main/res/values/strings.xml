@@ -7,7 +7,8 @@
     <string name="taskTitle">Task Name</string>
     <string name="taskDueDate">Due Date</string>
     <string name="Subject">Subject</string>
-    <!--    <string name=""></string>-->
+        <string name="navigation_drawer_open">Open navigation drawer</string>
+        <string name="navigation_drawer_close">Close navigation drawer</string>
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->

@@ -1,12 +1,18 @@
 package com.example.studyreminder;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -24,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     myDatabase myDB;
     ArrayList<String> task_id, task_subject, task_description, task_due_date;
     CustomAdapter customAdapter;
+    MenuView.ItemView taskMenu;
+
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +60,26 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawerLayout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
