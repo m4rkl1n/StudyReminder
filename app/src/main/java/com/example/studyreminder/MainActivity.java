@@ -1,10 +1,12 @@
 package com.example.studyreminder;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.customview.widget.ViewDragHelper;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,50 +17,31 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView recyclerView;
-    FloatingActionButton newTaskBtn;
-    myDatabase myDB;
-    ArrayList<String> task_id, task_subject, task_description, task_due_date;
-    CustomAdapter customAdapter;
     MenuView.ItemView taskMenu;
-
+    FloatingActionButton floatingBtn;
     private DrawerLayout drawer;
+
+    public MainActivity() throws NoSuchFieldException {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerTasks);
-        newTaskBtn = findViewById(R.id.floatingBtn);
-        newTaskBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
-            }
-        });
-        myDB = new myDatabase(MainActivity.this);
-        task_id = new ArrayList<>();
-        task_subject = new ArrayList<>();
-        task_description = new ArrayList<>();
-        task_due_date = new ArrayList<>();
-
-        storeDataArray();
-
-        customAdapter = new CustomAdapter(MainActivity.this, task_id, task_subject, task_description, task_due_date);
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,11 +49,30 @@ public class MainActivity extends AppCompatActivity {
         drawer = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                drawer.addDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,
+                    new TaskFragment()).commit();
+            navigationView.setCheckedItem(R.id.taskMenu);
+        }
     }
 
+    public void buttonClick(View view) {
+        floatingBtn = view.findViewById(R.id.floatingBtn);
+        floatingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -80,24 +82,28 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
     @Override
-    protected void onResume() {
-        super.onResume();
-        storeDataArray();
-    }
-
-    void storeDataArray() {
-        Cursor cursor = myDB.readAllData();
-        if (cursor.getCount() == 0) {
-            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
-
-        } else {
-            while (cursor.moveToNext()) {
-                task_id.add(cursor.getString(0));
-                task_subject.add(cursor.getString(1));
-                task_description.add(cursor.getString(2));
-                task_due_date.add(cursor.getString(3));
-            }
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.taskMenu:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,
+                        new TaskFragment()).commit();
+                break;
+            case R.id.subjects:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,
+                        new SubjectFragment()).commit();
+                break;
+            case R.id.feedback:
+            case R.id.share:
+                Toast.makeText(this, "Will Make", Toast.LENGTH_SHORT).show();
+                break;
         }
+        drawer.closeDrawer(GravityCompat.START);
+
+        return true;
     }
+
+
 }

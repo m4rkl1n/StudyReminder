@@ -40,7 +40,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
         View view = inflater.inflate(R.layout.to_do_list, parent, false);
         return new myViewHolder(view);
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
+//    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, final int position) {
         holder.taskid_txt.setText(String.valueOf(task_id.get(position)));
