@@ -9,11 +9,11 @@
     <string name="Subject">Subject</string>
         <string name="navigation_drawer_open">Open navigation drawer</string>
         <string name="navigation_drawer_close">Close navigation drawer</string>
-    <!--    <string name=""></string>-->
-    <!--    <string name=""></string>-->
-    <!--    <string name=""></string>-->
-    <!--    <string name=""></string>-->
-    <!--    <string name=""></string>-->
-    <!--    <string name=""></string>-->
-    <!--    <string name=""></string>-->
+        <string name="Subjects">Subjects</string>
+        <string name="AddDelete">Add/Delete Subjects</string>
+        <string name="Delete">Delete</string>
+        <string name="SubName">Subject Name</string>
+<!--        <string name=""></string>-->
+<!--        <string name=""></string>-->
+<!--        <string name=""></string>-->
 </resources>

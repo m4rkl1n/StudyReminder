@@ -22,10 +22,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
     private Context context;
     private Activity activity;
     private ArrayList task_id, task_subject, task_description, task_due_date;
-    private int position;
 
     CustomAdapter(Context context, ArrayList task_id, ArrayList task_subject, ArrayList task_description, ArrayList task_due_date){
-        this.activity = activity;
         this.context = context;
         this.task_id = task_id;
         this.task_description = task_description;
@@ -40,7 +38,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
         View view = inflater.inflate(R.layout.to_do_list, parent, false);
         return new myViewHolder(view);
     }
-//    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, final int position) {
         holder.taskid_txt.setText(String.valueOf(task_id.get(position)));
