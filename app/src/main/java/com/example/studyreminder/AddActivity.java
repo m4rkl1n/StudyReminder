@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
@@ -21,15 +22,20 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myDatabase myDB = new myDatabase(AddActivity.this);
         setContentView(R.layout.activity_add);
-        AddActivitySpinner();
-        sp = findViewById(R.id.subjectEntry);
-        ArrayAdapter<String> adapter;
+//        AddActivitySpinner();
+
         descEntry = findViewById(R.id.descEntry);
         dateEntry = findViewById(R.id.dateEntry);
         addBtn = findViewById(R.id.addbtn);
+        sp = findViewById(R.id.subjectEntry);
+        List<String> add_subject = myDB.getSubject();
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, add_subject);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp.setAdapter(adapter);
         addBtn.setOnClickListener(view -> {
-            myDatabase myDB = new myDatabase(AddActivity.this);
+//            myDatabase myDB = new myDatabase(AddActivity.this);
             String spinnerText = sp.getSelectedItem().toString();
             myDB.addTask(spinnerText.trim(),
                     descEntry.getText().toString().trim(),
@@ -38,7 +44,7 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void AddActivitySpinner() {
-        myDatabase myDB = new myDatabase(getApplicationContext());
+        myDatabase myDB = new myDatabase(AddActivity.this);
         List<String> add_subject = myDB.getSubject();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, add_subject);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
