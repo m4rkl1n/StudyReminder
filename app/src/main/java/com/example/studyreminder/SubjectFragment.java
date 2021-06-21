@@ -1,6 +1,7 @@
 package com.example.studyreminder;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +37,7 @@ public class SubjectFragment extends Fragment {
     Button addSubBtn, deleteBtn;
     myDatabase myDB;
     List<String> arrayList;
-    String subject, subjectString;
+    String subject;
     ArrayList<String> subjects = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     int positionOfSelectedDataFromSpinner;
@@ -97,13 +99,27 @@ public class SubjectFragment extends Fragment {
     }
 
     private void delete() {
-        int pos = sp.getSelectedItemPosition();
-        if (pos > -1) {
-            adapter.remove(subjects.get(pos));
-            adapter.notifyDataSetChanged();
-            Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getActivity(), "Nothing to delete!", Toast.LENGTH_SHORT).show();
-        }
+        myDatabase myDB = new myDatabase(getContext());
+        myDB.deleteOneRow(subject);
+    }
+    void confirmDialog(){
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete " + subject + " ?");
+        builder.setMessage("Are you sure you want to delete " + subject + " ?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                myDatabase myDB = new myDatabase(getContext());
+                myDB.deleteOneRow(subject);
+
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 }

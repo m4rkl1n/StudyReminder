@@ -25,10 +25,9 @@ public class TaskFragment extends Fragment {
     ArrayList<String> task_id, task_subject, task_description, task_due_date;
     CustomAdapter customAdapter;
     RecyclerView.LayoutManager layoutManager;
-
+    FloatingActionButton floatingBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
         recyclerView = view.findViewById(R.id.recyclerTasks);
         myDB = new myDatabase(getActivity());
@@ -36,6 +35,15 @@ public class TaskFragment extends Fragment {
         task_subject = new ArrayList<>();
         task_description = new ArrayList<>();
         task_due_date = new ArrayList<>();
+
+        floatingBtn = view.findViewById(R.id.floatingBtn);
+        floatingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AddActivity.class);
+                startActivity(intent);
+            }
+        });
 
         customAdapter = new CustomAdapter(getActivity(),  task_id, task_subject, task_description, task_due_date);
         recyclerView.setHasFixedSize(true);
@@ -48,8 +56,9 @@ public class TaskFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        storeDataArray();
+//        storeDataArray();
     }
+
 
     void storeDataArray() {
         Cursor cursor = myDB.readAllData();

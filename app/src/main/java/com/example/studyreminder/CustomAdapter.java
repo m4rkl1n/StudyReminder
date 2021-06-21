@@ -44,18 +44,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
         holder.taskSubject_txt.setText(String.valueOf(task_subject.get(position)));
         holder.taskDescription_txt.setText(String.valueOf(task_description.get(position)));
         holder.taskDate_txt.setText(String.valueOf(task_due_date.get(position)));
-
-//        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, UpdateActivity.class);
-//                intent.putExtra("id", String.valueOf(task_id.get(position)));
-//                intent.putExtra("description", String.valueOf(task_description.get(position)));
-//                intent.putExtra("subject", String.valueOf(task_subject.get(position)));
-//                intent.putExtra("dueDate", String.valueOf(task_due_date.get(position)));
-//                context.startActivity(intent);
-//            }
-//        });
     }
 
 

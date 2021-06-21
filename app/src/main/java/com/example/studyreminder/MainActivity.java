@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FloatingActionButton floatingBtn;
     private DrawerLayout drawer;
 
-    public MainActivity() throws NoSuchFieldException {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +58,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new TaskFragment()).commit();
             navigationView.setCheckedItem(R.id.taskMenu);
         }
-    }
-
-    public void buttonClick(View view) {
-        floatingBtn = view.findViewById(R.id.floatingBtn);
-        floatingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
+
 
     @Override
     public void onBackPressed() {
