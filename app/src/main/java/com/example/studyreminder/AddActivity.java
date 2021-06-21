@@ -16,7 +16,6 @@ public class AddActivity extends AppCompatActivity {
     EditText descEntry, dateEntry;
     Spinner sp;
     Button addBtn;
-    myDatabase myDB;
     ArrayAdapter<String> adapter;
 
     @Override
@@ -24,8 +23,6 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         myDatabase myDB = new myDatabase(AddActivity.this);
         setContentView(R.layout.activity_add);
-//        AddActivitySpinner();
-
         descEntry = findViewById(R.id.descEntry);
         dateEntry = findViewById(R.id.dateEntry);
         addBtn = findViewById(R.id.addbtn);
@@ -35,20 +32,10 @@ public class AddActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(adapter);
         addBtn.setOnClickListener(view -> {
-//            myDatabase myDB = new myDatabase(AddActivity.this);
             String spinnerText = sp.getSelectedItem().toString();
             myDB.addTask(spinnerText.trim(),
                     descEntry.getText().toString().trim(),
                     Integer.valueOf(dateEntry.getText().toString().trim()));
         });
-    }
-
-    private void AddActivitySpinner() {
-        myDatabase myDB = new myDatabase(AddActivity.this);
-        List<String> add_subject = myDB.getSubject();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, add_subject);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(adapter);
-
     }
 }

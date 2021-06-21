@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHolder> {
 
     private Context context;
-    private Activity activity;
     private ArrayList task_id, task_subject, task_description, task_due_date;
 
     CustomAdapter(Context context, ArrayList task_id, ArrayList task_subject, ArrayList task_description, ArrayList task_due_date){
@@ -46,17 +45,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
         holder.taskDescription_txt.setText(String.valueOf(task_description.get(position)));
         holder.taskDate_txt.setText(String.valueOf(task_due_date.get(position)));
 
-        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, UpdateActivity.class);
-                intent.putExtra("id", String.valueOf(task_id.get(position)));
-                intent.putExtra("description", String.valueOf(task_description.get(position)));
-                intent.putExtra("subject", String.valueOf(task_subject.get(position)));
-                intent.putExtra("dueDate", String.valueOf(task_due_date.get(position)));
-                context.startActivity(intent);
-            }
-        });
+//        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, UpdateActivity.class);
+//                intent.putExtra("id", String.valueOf(task_id.get(position)));
+//                intent.putExtra("description", String.valueOf(task_description.get(position)));
+//                intent.putExtra("subject", String.valueOf(task_subject.get(position)));
+//                intent.putExtra("dueDate", String.valueOf(task_due_date.get(position)));
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
 

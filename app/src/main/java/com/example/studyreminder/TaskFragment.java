@@ -37,12 +37,12 @@ public class TaskFragment extends Fragment {
         task_description = new ArrayList<>();
         task_due_date = new ArrayList<>();
 
-        customAdapter = new CustomAdapter(getActivity(), task_id, task_subject, task_description, task_due_date);
-        layoutManager = new LinearLayoutManager(getContext());
+        customAdapter = new CustomAdapter(getActivity(),  task_id, task_subject, task_description, task_due_date);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         storeDataArray();
-        return inflater.inflate(R.layout.fragment_tasks, container, false);
+        return view;
 
     }
     @Override
