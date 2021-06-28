@@ -15,10 +15,8 @@ import android.widget.Toast;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    EditText title_input, author_input, pages_input;
     Button addBtn2, delete_button;
-    EditText descEntry2, dateEntry2;
-    Spinner sp2;
+    EditText descEntry2, dateEntry2, subjectEntry2;
     String id, description, dueDate, subject;
 
     @Override
@@ -29,7 +27,7 @@ public class UpdateActivity extends AppCompatActivity {
         descEntry2 = findViewById(R.id.descEntry2);
         dateEntry2 = findViewById(R.id.dateEntry2);
         addBtn2= findViewById(R.id.addbtn2);
-        sp2 = findViewById(R.id.subjectEntry2);
+        subjectEntry2 = findViewById(R.id.subjectEntry2);
         delete_button = findViewById(R.id.delete_button);
 
         //First we call this
@@ -48,8 +46,9 @@ public class UpdateActivity extends AppCompatActivity {
                 MyDatabase myDB = new MyDatabase(UpdateActivity.this);
                 description = descEntry2.getText().toString().trim();
                 dueDate =dateEntry2.getText().toString().trim();
-                subject = sp2.getSelectedItem().toString().trim();
+                subject = subjectEntry2.getText().toString().trim();
                 myDB.updateData(id, subject, description, dueDate);
+
             }
         });
         delete_button.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +72,9 @@ public class UpdateActivity extends AppCompatActivity {
             dueDate = getIntent().getStringExtra("dueDate");
 
             //Setting Intent Data
-            title_input.setText(subject);
-            author_input.setText(description);
-            pages_input.setText(dueDate);
+            subjectEntry2.setText(subject);
+            descEntry2.setText(description);
+            dateEntry2.setText(dueDate);
             Log.d("stev", subject+" "+description+" "+dueDate);
         }else{
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
@@ -84,13 +83,13 @@ public class UpdateActivity extends AppCompatActivity {
 
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + subject + " Task?");
-        builder.setMessage("Are you sure you want to delete this " + subject + " task?");
+        builder.setTitle("Delete Task?");
+        builder.setMessage("Are you sure you want to delete this  task?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabase myDB = new MyDatabase(UpdateActivity.this);
-                myDB.deleteOneRow(subject);
+                myDB.deleteOneRow(id);
                 finish();
             }
         });

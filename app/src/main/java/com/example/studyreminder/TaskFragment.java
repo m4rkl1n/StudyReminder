@@ -46,7 +46,7 @@ public class TaskFragment extends Fragment {
         });
 
 
-        customAdapter = new CustomAdapter(getActivity(), task_id, task_subject, task_description, task_due_date);
+        customAdapter = new CustomAdapter(getContext(), getActivity(), task_id, task_subject, task_description, task_due_date);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(customAdapter);
@@ -54,6 +54,7 @@ public class TaskFragment extends Fragment {
         return view;
 
     }
+
 
     @Override
     public void onResume() {

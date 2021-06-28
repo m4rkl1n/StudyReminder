@@ -28,8 +28,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
     ImageButton deleteTask;
     String task;
 
-    CustomAdapter(Context context, ArrayList task_id, ArrayList task_subject, ArrayList task_description, ArrayList task_due_date){
+    CustomAdapter(Context context, Activity activity, ArrayList task_id, ArrayList task_subject, ArrayList task_description, ArrayList task_due_date){
         this.context = context;
+        this.activity = activity;
         this.task_id = task_id;
         this.task_description = task_description;
         this.task_subject = task_subject;

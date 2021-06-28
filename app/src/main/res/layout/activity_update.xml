@@ -36,12 +36,13 @@
         app:layout_constraintTop_toBottomOf="@+id/dateEntry2"
         />
 
-    <Spinner
+    <EditText
         android:id="@+id/subjectEntry2"
         android:layout_width="228dp"
         android:layout_height="55dp"
         android:popupBackground="#5c5c5c"
         android:textAlignment="center"
+        android:hint="@string/Subject"
         app:layout_constraintBottom_toTopOf="@+id/dateEntry2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

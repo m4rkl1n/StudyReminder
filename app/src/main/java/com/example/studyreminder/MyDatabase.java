@@ -131,7 +131,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     public void deleteOneRow(String row_subject){
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(TABLESUBJECTS, "_id=?", new String[]{row_subject});
+        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_subject});
         if(result == -1){
             Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
         }else{

@@ -1,6 +1,7 @@
 package com.example.studyreminder;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,9 +67,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            recreate();
+        }
     }
+
 
     @Override
     public void onBackPressed() {
