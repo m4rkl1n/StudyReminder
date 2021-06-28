@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class myDatabase extends SQLiteOpenHelper {
+public class MyDatabase extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DB_name = "allTasks.db";
@@ -32,7 +32,7 @@ public class myDatabase extends SQLiteOpenHelper {
 //
 //    }
 
-    public myDatabase(@Nullable Context context) {
+    public MyDatabase(@Nullable Context context) {
         super(context, DB_name, null, DB_version);
         this.context = context;
     }
@@ -102,6 +102,21 @@ public class myDatabase extends SQLiteOpenHelper {
             Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
         }
     }
+    public void updateData(String row_id, String title, String description, String dueDate){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TITLE, title);
+        cv.put(COLUMN_DESCRIPTION, description);
+        cv.put(COLUMN_DUE_DATE, dueDate);
+
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -113,9 +128,10 @@ public class myDatabase extends SQLiteOpenHelper {
         }
         return cursor;
     }
-    void deleteOneRow(String row_subject){
+
+    public void deleteOneRow(String row_subject){
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(TABLESUBJECTS, "subjects", new String[]{row_subject});
+        long result = db.delete(TABLESUBJECTS, "_id=?", new String[]{row_subject});
         if(result == -1){
             Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
         }else{

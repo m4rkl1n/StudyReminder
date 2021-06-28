@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
@@ -21,7 +20,7 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myDatabase myDB = new myDatabase(AddActivity.this);
+        MyDatabase myDB = new MyDatabase(AddActivity.this);
         setContentView(R.layout.activity_add);
         descEntry = findViewById(R.id.descEntry);
         dateEntry = findViewById(R.id.dateEntry);

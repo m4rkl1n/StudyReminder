@@ -1,31 +1,19 @@
 package com.example.studyreminder;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.button.MaterialButtonToggleGroup;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +23,9 @@ public class SubjectFragment extends Fragment {
     Spinner sp;
     EditText addSubjectEntry;
     Button addSubBtn, deleteBtn;
-    myDatabase myDB;
+    MyDatabase myDB;
     List<String> arrayList;
-    String subject;
+    String subject, deleteSubject;
     ArrayList<String> subjects = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     int positionOfSelectedDataFromSpinner;
@@ -48,7 +36,7 @@ public class SubjectFragment extends Fragment {
         addSubBtn = view.findViewById(R.id.addSubBtn);
         addSubjectEntry = view.findViewById(R.id.addSubjectEntry);
         deleteBtn = view.findViewById(R.id.deleteBtn);
-        myDB = new myDatabase(getContext());
+        myDB = new MyDatabase(getContext());
         arrayList = myDB.getSubject();
         loadSpinnerData();
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -72,7 +60,7 @@ public class SubjectFragment extends Fragment {
     }
 
     private void loadSpinnerData() {
-        myDatabase db = new myDatabase(getActivity().getApplicationContext());
+        MyDatabase db = new MyDatabase(getActivity().getApplicationContext());
         List<String> add_subject = db.getSubject();
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, add_subject);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,7 +70,7 @@ public class SubjectFragment extends Fragment {
     private void add() {
         subject = addSubjectEntry.getText().toString();
         if (subject.trim().length() > 0) {
-            myDatabase db = new myDatabase(getContext());
+            MyDatabase db = new MyDatabase(getContext());
             db.addSubject(subject);
             loadSpinnerData();
             if (!subject.isEmpty()) {
@@ -99,27 +87,6 @@ public class SubjectFragment extends Fragment {
     }
 
     private void delete() {
-        myDatabase myDB = new myDatabase(getContext());
-        myDB.deleteOneRow(subject);
-    }
-    void confirmDialog(){
-        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Delete " + subject + " ?");
-        builder.setMessage("Are you sure you want to delete " + subject + " ?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                myDatabase myDB = new myDatabase(getContext());
-                myDB.deleteOneRow(subject);
 
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.create().show();
     }
 }

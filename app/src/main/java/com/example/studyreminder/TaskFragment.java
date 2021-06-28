@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,31 +22,31 @@ import java.util.ArrayList;
 public class TaskFragment extends Fragment {
 
     RecyclerView recyclerView;
-    myDatabase myDB;
+    MyDatabase myDB;
     ArrayList<String> task_id, task_subject, task_description, task_due_date;
     CustomAdapter customAdapter;
     RecyclerView.LayoutManager layoutManager;
     FloatingActionButton floatingBtn;
+    ImageButton deleteTask, deleteAll;
+    String task;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
         recyclerView = view.findViewById(R.id.recyclerTasks);
-        myDB = new myDatabase(getActivity());
+        myDB = new MyDatabase(getActivity());
         task_id = new ArrayList<>();
         task_subject = new ArrayList<>();
         task_description = new ArrayList<>();
         task_due_date = new ArrayList<>();
 
         floatingBtn = view.findViewById(R.id.floatingBtn);
-        floatingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddActivity.class);
-                startActivity(intent);
-            }
+        floatingBtn.setOnClickListener(view12 -> {
+            Intent intent = new Intent(getActivity(), AddActivity.class);
+            startActivity(intent);
         });
 
-        customAdapter = new CustomAdapter(getActivity(),  task_id, task_subject, task_description, task_due_date);
+
+        customAdapter = new CustomAdapter(getActivity(), task_id, task_subject, task_description, task_due_date);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(customAdapter);
@@ -53,6 +54,7 @@ public class TaskFragment extends Fragment {
         return view;
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -74,4 +76,6 @@ public class TaskFragment extends Fragment {
             }
         }
     }
+
+
 }

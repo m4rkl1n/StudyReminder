@@ -32,6 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="30dp"
         app:tint="@color/white"
-        android:onClick="buttonClick"/>
+/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
