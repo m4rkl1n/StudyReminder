@@ -13,11 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +37,7 @@ public class TaskFragment extends Fragment {
     CustomAdapter customAdapter;
     FloatingActionButton floatingBtn;
     Button deleteAllSubBtn;
+    ConstraintLayout noDataView;
     Activity activity;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class TaskFragment extends Fragment {
         task_subject = new ArrayList<>();
         task_description = new ArrayList<>();
         task_due_date = new ArrayList<>();
+        noDataView = view.findViewById(R.id.noDataView);
         deleteAllSubBtn = view.findViewById(R.id.deleteAllSubBtn);
         deleteAllSubBtn.setOnClickListener(view1 -> {
             confirmDialog();
@@ -75,7 +80,7 @@ public class TaskFragment extends Fragment {
     void storeDataArray() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {
-            Toast.makeText(getActivity(), "No tasks, press the + button to add a new task", Toast.LENGTH_LONG).show();
+            noDataView.setVisibility(View.VISIBLE);
 
         } else {
             while (cursor.moveToNext()) {
@@ -83,6 +88,7 @@ public class TaskFragment extends Fragment {
                 task_subject.add(cursor.getString(1));
                 task_description.add(cursor.getString(2));
                 task_due_date.add(cursor.getString(3));
+                noDataView.setVisibility(View.GONE);
             }
         }
     }
