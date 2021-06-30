@@ -2,6 +2,7 @@ package com.example.studyreminder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +36,9 @@ public class AddActivity extends AppCompatActivity {
             myDB.addTask(spinnerText.trim(),
                     descEntry.getText().toString().trim(),
                     Integer.valueOf(dateEntry.getText().toString().trim()));
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
             finish();
         });
     }
