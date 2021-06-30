@@ -48,6 +48,7 @@ public class UpdateActivity extends AppCompatActivity {
                 dueDate =dateEntry2.getText().toString().trim();
                 subject = subjectEntry2.getText().toString().trim();
                 myDB.updateData(id, subject, description, dueDate);
+                finish();
 
             }
         });
@@ -79,6 +80,11 @@ public class UpdateActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     void confirmDialog(){

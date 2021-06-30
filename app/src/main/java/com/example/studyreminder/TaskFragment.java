@@ -1,16 +1,23 @@
 package com.example.studyreminder;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,10 +32,9 @@ public class TaskFragment extends Fragment {
     MyDatabase myDB;
     ArrayList<String> task_id, task_subject, task_description, task_due_date;
     CustomAdapter customAdapter;
-    RecyclerView.LayoutManager layoutManager;
     FloatingActionButton floatingBtn;
-    ImageButton deleteTask, deleteAll;
-    String task;
+    Button deleteAllSubBtn;
+    Activity activity;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
@@ -38,13 +44,16 @@ public class TaskFragment extends Fragment {
         task_subject = new ArrayList<>();
         task_description = new ArrayList<>();
         task_due_date = new ArrayList<>();
+        deleteAllSubBtn = view.findViewById(R.id.deleteAllSubBtn);
+        deleteAllSubBtn.setOnClickListener(view1 -> {
+            confirmDialog();
+        });
 
         floatingBtn = view.findViewById(R.id.floatingBtn);
         floatingBtn.setOnClickListener(view12 -> {
             Intent intent = new Intent(getActivity(), AddActivity.class);
             startActivity(intent);
         });
-
 
         customAdapter = new CustomAdapter(getContext(), getActivity(), task_id, task_subject, task_description, task_due_date);
         recyclerView.setHasFixedSize(true);
@@ -66,7 +75,7 @@ public class TaskFragment extends Fragment {
     void storeDataArray() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {
-            Toast.makeText(getActivity(), "No data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "No tasks, press the + button to add a new task", Toast.LENGTH_LONG).show();
 
         } else {
             while (cursor.moveToNext()) {
@@ -77,6 +86,32 @@ public class TaskFragment extends Fragment {
             }
         }
     }
+
+    void confirmDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete All?");
+        builder.setMessage("Are you sure you want to delete all Data?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MyDatabase myDB = new MyDatabase(getActivity());
+                myDB.deleteAllData();
+                //Refresh Activity
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
+    }
+
+
 
 
 }
