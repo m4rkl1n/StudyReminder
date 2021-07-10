@@ -44,14 +44,26 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //And only then we call this
                 MyDatabase myDB = new MyDatabase(UpdateActivity.this);
-                description = descEntry2.getText().toString().trim();
-                dueDate =dateEntry2.getText().toString().trim();
-                subject = subjectEntry2.getText().toString().trim();
-                myDB.updateData(id, subject, description, dueDate);
-                finish();
-
+                String description = descEntry2.getText().toString().trim();
+                String subject = subjectEntry2.getText().toString().trim();
+                String dueDate = dateEntry2.getText().toString().trim();
+                if (description.length() > 0 && description.length() < 25) {
+                    if (subject.length() > 0 && subject.length() < 15) {
+                        if (dueDate.matches("^\\d{2}/\\d{2}")) {
+                            myDB.updateData(id, subject, description, dueDate);
+                            finish();
+                        } else {
+                            Toast.makeText(UpdateActivity.this, "Please use dd/mm format", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(UpdateActivity.this, "Must be more than 1 and less than 15 letters", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(UpdateActivity.this, "Subject must be more than 1 and less than 15 letters", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +88,7 @@ public class UpdateActivity extends AppCompatActivity {
             subjectEntry2.setText(subject);
             descEntry2.setText(description);
             dateEntry2.setText(dueDate);
-            Log.d("stev", subject+" "+description+" "+dueDate);
+            Log.d("set ", subject+" "+description+" "+dueDate);
         }else{
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }

@@ -6,35 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/addTasktxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="50dp"
-        android:text="@string/addTask"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/descEntry"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/addbtn"
         android:layout_width="155dp"
         android:layout_height="57dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/add"
         android:textAllCaps="false"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateEntry"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/subjectEntry"
@@ -51,28 +34,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="70dp"
         android:ems="10"
         android:hint="What needs to be done?"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/subjectEntry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/dateEntry"
-        android:layout_width="104dp"
-        android:layout_height="47dp"
+        android:layout_width="176dp"
+        android:layout_height="44dp"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="125dp"
         android:ems="10"
-        android:hint="@string/taskDueDate"
-        android:inputType="phone"
+        android:hint="Due date (dd/mm)"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subjectEntry" />
+
+    <EditText
+        android:id="@+id/remindIn"
+        android:layout_width="183dp"
+        android:layout_height="51dp"
+        android:hint="Days"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/addbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateEntry" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remind me in:"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/remindIn"
+        app:layout_constraintStart_toStartOf="@+id/remindIn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Subject"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/subjectEntry"
+        app:layout_constraintStart_toStartOf="@+id/subjectEntry" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,18 @@
     <string name="AddDelete">Add/Delete Subjects</string>
     <string name="Delete">Delete</string>
     <string name="SubName">Subject Name</string>
-    <!--        <string name=""></string>-->
-    <!--        <string name=""></string>-->
-    <!--        <string name=""></string>-->
+    <string name="update">Update</string>
+    <string name="UpdateTask">Update Task</string>
+    <string name="description">What needs to be done?</string>
+    <string name="dueDate">Due Date (dd/mm)</string>
+    <string name="RemindIn">Remind me in:</string>
+    <string name="DelAllTasks">Delete All Tasks</string>
+    <string name="DeleteSubjects">Delete Subjects</string>
+    <string name="AddSubjects">Add Subjects</string>
+    <string name="SubjectName">Subject Name</string>
+    <string name="DeleteAll">Delete All</string>
+    <string name="Feedback">Feedback</string>
+    <string name="Share">Share</string>
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
 </resources>

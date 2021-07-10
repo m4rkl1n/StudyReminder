@@ -24,6 +24,7 @@
         android:text="Delete All Tasks"
         android:textSize="18dp"
         android:padding="7dp"
+        android:layout_marginTop="15dp"
         android:layout_marginHorizontal="15dp"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"

@@ -44,7 +44,7 @@ public class MyDatabase extends SQLiteOpenHelper {
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_TITLE + " TEXT, " +
                 COLUMN_DESCRIPTION + " TEXT, " +
-                COLUMN_DUE_DATE + " INTEGER);";
+                COLUMN_DUE_DATE + " BLOB);";
         db.execSQL(query);
         String addSubject = "CREATE TABLE " + TABLESUBJECTS +
                 "(" + ADDSUBJECT + " TEXT);";
@@ -88,7 +88,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
 
-    void addTask(String subject, String description, Integer dueDate) {
+    void addTask(String subject, String description, String dueDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -129,9 +129,19 @@ public class MyDatabase extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void deleteOneRow(String row_subject){
+    public void deleteOneRow(String row_task){
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_subject});
+        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_task});
+        if(result == -1){
+            Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void deleteOneSubject(String row_subject){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLESUBJECTS, "add_subject", new String[]{row_subject});
         if(result == -1){
             Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
         }else{
@@ -143,5 +153,12 @@ public class MyDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
     }
+
+    void deleteAllSubjects(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLESUBJECTS);
+    }
+
+
 }
 

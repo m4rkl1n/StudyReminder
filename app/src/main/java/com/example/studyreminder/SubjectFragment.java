@@ -1,5 +1,7 @@
 package com.example.studyreminder;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class SubjectFragment extends Fragment {
 
     Spinner sp;
     EditText addSubjectEntry;
-    Button addSubBtn, deleteBtn;
+    Button addSubBtn, deleteBtn, deleteAllBtn;
     MyDatabase myDB;
     List<String> arrayList;
     String subject, deleteSubject;
@@ -36,6 +39,7 @@ public class SubjectFragment extends Fragment {
         addSubBtn = view.findViewById(R.id.addSubBtn);
         addSubjectEntry = view.findViewById(R.id.addSubjectEntry);
         deleteBtn = view.findViewById(R.id.deleteBtn);
+        deleteAllBtn = view.findViewById(R.id.deleteAllBtn);
         myDB = new MyDatabase(getContext());
         arrayList = myDB.getSubject();
         loadSpinnerData();
@@ -55,7 +59,7 @@ public class SubjectFragment extends Fragment {
             }
         });
         addSubBtn.setOnClickListener(view1 -> add());
-        deleteBtn.setOnClickListener(view12 -> delete());
+        deleteAllBtn.setOnClickListener(view12 -> confirmDialog());
         return view;
     }
 
@@ -69,24 +73,65 @@ public class SubjectFragment extends Fragment {
 
     private void add() {
         subject = addSubjectEntry.getText().toString();
-        if (subject.trim().length() > 0) {
+        if (subject.trim().length() > 0 && subject.length() < 15) {
             MyDatabase db = new MyDatabase(getContext());
             db.addSubject(subject);
             loadSpinnerData();
-            if (!subject.isEmpty()) {
-                adapter.add(subject);
-                Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
-                addSubjectEntry.setText("");
-                arrayList.clear();
-                arrayList.addAll(myDB.getSubject());
-                adapter.notifyDataSetChanged();
-            } else {
-                Toast.makeText(getActivity(), "Nothing to add!", Toast.LENGTH_SHORT).show();
-            }
+            adapter.add(subject);
+            Toast.makeText(getContext(), "Added", Toast.LENGTH_SHORT).show();
+            addSubjectEntry.setText("");
+            arrayList.clear();
+            arrayList.addAll(myDB.getSubject());
+            adapter.notifyDataSetChanged();
+            }else{
+            Toast.makeText(getContext(), "this subject is too short or too long", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void delete() {
 
+
+    void confirmDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete All?");
+        builder.setMessage("Are you sure you want to delete all subjects?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MyDatabase myDB = new MyDatabase(getActivity());
+                myDB.deleteAllSubjects();
+                //Refresh Activity
+                loadSpinnerData();
+                Toast.makeText(getContext(), "Deleted all subjects", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
+    }
+    void confirmSubjectDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete All?");
+        builder.setMessage("Are you sure you want to delete all subjects?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MyDatabase myDB = new MyDatabase(getActivity());
+//                myDB.deleteOneSubject();
+                //Refresh Activity
+                loadSpinnerData();
+                Toast.makeText(getContext(), "Deleted all subjects", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
     }
 }

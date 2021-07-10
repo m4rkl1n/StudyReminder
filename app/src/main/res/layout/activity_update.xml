@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:layout_marginBottom="50dp"
-        android:text="@string/addTask"
+        android:text="@string/UpdateTask"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/descEntry2"
@@ -55,7 +55,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
         android:ems="10"
-        android:hint="What needs to be done?"
+        android:hint="@string/description"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/subjectEntry2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,12 +75,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectEntry2" />
+        app:layout_constraintTop_toBottomOf="@+id/subjectEntry2"
+        />
 
     <Button
         android:id="@+id/delete_button"
-        android:layout_width="156dp"
-        android:layout_height="51dp"
+        android:layout_width="155dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
         android:text="Delete"
         android:textAllCaps="false"
         android:textSize="20sp"
