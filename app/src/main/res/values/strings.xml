@@ -26,5 +26,12 @@
     <string name="Feedback">Feedback</string>
     <string name="Share">Share</string>
     <string name="days">days</string>
+    <string name="desc">What needs to be done?</string>
+    <string name="nothing">Nothing to show</string>
+    <string name="pressAdd">Press + to add new task</string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
 <!--    <string name=""></string>-->
 </resources>
