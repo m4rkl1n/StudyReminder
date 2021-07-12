@@ -25,6 +25,6 @@
     <string name="DeleteAll">Delete All</string>
     <string name="Feedback">Feedback</string>
     <string name="Share">Share</string>
-<!--    <string name=""></string>-->
+    <string name="days">days</string>
 <!--    <string name=""></string>-->
 </resources>

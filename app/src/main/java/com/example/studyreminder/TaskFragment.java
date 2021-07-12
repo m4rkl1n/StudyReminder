@@ -46,6 +46,7 @@ public class TaskFragment extends Fragment {
     ConstraintLayout noDataView;
     Activity activity;
 
+//creates all the views for the main page.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
         recyclerView = view.findViewById(R.id.recyclerTasks);
@@ -79,10 +80,9 @@ public class TaskFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        storeDataArray();
     }
 
-
+//gets data from the database to this class
     void storeDataArray() {
         Cursor cursor = myDB.readAllData();
         if (cursor.getCount() == 0) {
@@ -99,6 +99,7 @@ public class TaskFragment extends Fragment {
         }
     }
 
+    //code used for deleting all subjects
     void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Delete All?");

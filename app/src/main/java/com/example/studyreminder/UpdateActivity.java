@@ -30,7 +30,7 @@ public class UpdateActivity extends AppCompatActivity {
         subjectEntry2 = findViewById(R.id.subjectEntry2);
         delete_button = findViewById(R.id.delete_button);
 
-        //First we call this
+
         getAndSetIntentData();
 
         //Set actionbar title after getAndSetIntentData method
@@ -42,11 +42,13 @@ public class UpdateActivity extends AppCompatActivity {
         addBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //And only then we call this
                 MyDatabase myDB = new MyDatabase(UpdateActivity.this);
                 String description = descEntry2.getText().toString().trim();
                 String subject = subjectEntry2.getText().toString().trim();
                 String dueDate = dateEntry2.getText().toString().trim();
+
+                //to check if the user enters right values, if they do they can continue
+                //else they will get a toast message
                 if (description.length() > 0 && description.length() < 25) {
                     if (subject.length() > 0 && subject.length() < 15) {
                         if (dueDate.matches("^\\d{2}/\\d{2}")) {
@@ -73,6 +75,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     }
 
+    //getting the data from the database and then putting it into the EditTexts
     void getAndSetIntentData(){
         if(getIntent().hasExtra("id")
                 && getIntent().hasExtra("subject")
@@ -99,6 +102,7 @@ public class UpdateActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    //delete the task
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete Task?");

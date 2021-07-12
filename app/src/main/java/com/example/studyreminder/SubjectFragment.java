@@ -33,12 +33,14 @@ public class SubjectFragment extends Fragment {
     ArrayAdapter<String> adapter;
     int positionOfSelectedDataFromSpinner;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_message, container, false);
         sp = view.findViewById(R.id.addSubjectSpinner);
         addSubBtn = view.findViewById(R.id.addSubBtn);
         addSubjectEntry = view.findViewById(R.id.addSubjectEntry);
         deleteBtn = view.findViewById(R.id.deleteBtn);
+        deleteBtn.setOnClickListener(view1 -> Toast.makeText(getContext(), "In the making", Toast.LENGTH_SHORT).show());
         deleteAllBtn = view.findViewById(R.id.deleteAllBtn);
         myDB = new MyDatabase(getContext());
         arrayList = myDB.getSubject();
@@ -63,6 +65,7 @@ public class SubjectFragment extends Fragment {
         return view;
     }
 
+    //getting data from the database to the spinner
     private void loadSpinnerData() {
         MyDatabase db = new MyDatabase(getActivity().getApplicationContext());
         List<String> add_subject = db.getSubject();
@@ -71,6 +74,7 @@ public class SubjectFragment extends Fragment {
         sp.setAdapter(adapter);
     }
 
+    //for adding a new subject
     private void add() {
         subject = addSubjectEntry.getText().toString();
         if (subject.trim().length() > 0 && subject.length() < 15) {
@@ -89,7 +93,7 @@ public class SubjectFragment extends Fragment {
     }
 
 
-
+//if they want to delete all subbjects
     void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Delete All?");

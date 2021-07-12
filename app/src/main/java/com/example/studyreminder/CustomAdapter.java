@@ -37,6 +37,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
         this.task_due_date = task_due_date;
     }
 
+    //creating viewHolders for recyclerview which i put a layout to from my xml
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,7 +47,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.myViewHold
 
     }
 
-
+//displaying each recyclerview item
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, final int position) {

@@ -3,10 +3,12 @@ package com.example.studyreminder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -23,14 +25,18 @@ public class AddActivity extends AppCompatActivity {
 
     EditText descEntry, dateEntry, remindIn;
     Spinner sp;
+    Context context;
     Button addBtn;
     String sDate, sSubject, sDescription, sRemindIn;
     ArrayAdapter<String> adapter;
     int IntDate;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.context = context;
         MyDatabase myDB = new MyDatabase(AddActivity.this);
         setContentView(R.layout.activity_add);
         createNotificationChannel();
@@ -47,6 +53,8 @@ public class AddActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(adapter);
 
+        //when the user clicks the button, the app will change everything
+        // the user has entered into a string which is used to be stored
         addBtn.setOnClickListener(view -> {
             sDate = dateEntry.getText().toString().trim();
             sRemindIn = remindIn.getText().toString().trim();
@@ -55,22 +63,25 @@ public class AddActivity extends AppCompatActivity {
             String spinnerText = sp.getSelectedItem().toString();
             sSubject = spinnerText.trim();
             Intent intent = new Intent(AddActivity.this, NotificationReminder.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(AddActivity.this, 0, intent, 0);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-            long timeAtButtonClick = System.currentTimeMillis();
-//            long dateInDays = 86400000*intDate;
-            long dateInDays = 1000*intDate;
-
-            alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick + dateInDays, pendingIntent);
-
-
+//this is used to avoid the user from being able to enter  " " or something with 25 letters.
+// the user also needs to follow the correct date format
             if (sDate.matches("^\\d{2}/\\d{2}")) {
                 if(sDescription.length() >1 && sDescription.length() <26) {
                     if(intDate < 101 && intDate >0) {
                         myDB.addTask(sSubject,
                                 sDescription,
                                 sDate);
+
+                        //code used to send notifications
+                        PendingIntent resultPendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                        long timeAtButtonClick = System.currentTimeMillis();
+//            long dateInDays = 86400000*intDate;
+                        long dateInDays = 1000*intDate;
+                        NotificationReminder notificationReminder = new NotificationReminder();
+
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, timeAtButtonClick + dateInDays, resultPendingIntent);
                         intent = new Intent(this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -83,11 +94,10 @@ public class AddActivity extends AppCompatActivity {
             }else{
                 Toast.makeText(this, "Please use dd/mm format", Toast.LENGTH_SHORT).show();
             }
-
-
-
         });
     }
+
+    //notification codes
     void createNotificationChannel(){
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             CharSequence name = "ReminderChannel";

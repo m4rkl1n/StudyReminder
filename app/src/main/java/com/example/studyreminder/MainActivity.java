@@ -46,10 +46,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//creates a custom toolbar instead of original taskbar
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //this is for the navigation drawer
         drawer = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,8 +68,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
-    @Override
 
+    //used to return something after another activity is finished
+    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1){
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
+//pressing back on navigation drawer
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
+//used to see which fragment they choose from the navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

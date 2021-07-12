@@ -3,10 +3,13 @@ package com.example.studyreminder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+//code used for creating notifications
 public class NotificationReminder extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -20,4 +23,6 @@ public class NotificationReminder extends BroadcastReceiver {
 
         notificationManagerCompat.notify(200, builder.build());
     }
-}
+
+
+    }

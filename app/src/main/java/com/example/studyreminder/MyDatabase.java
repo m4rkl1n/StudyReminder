@@ -27,17 +27,13 @@ public class MyDatabase extends SQLiteOpenHelper {
     private static final String ADDSUBJECT = "add_subject";
 
 
-//    @Override
-//    public String getDatabaseName() {
-//
-//    }
 
     public MyDatabase(@Nullable Context context) {
         super(context, DB_name, null, DB_version);
         this.context = context;
     }
 
-
+//used to create each set of data
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME +
@@ -51,6 +47,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.execSQL(addSubject);
     }
 
+    //used for upgrading versions of database
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -59,7 +56,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     }
 
-
+//adding a subject to database
     public boolean addSubject(String add_subject) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -74,6 +71,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return true;
     }
 
+    //getting the subject
     public List<String> getSubject() {
         List<String> subjects = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -88,6 +86,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
 
+// code for getting one row of data
     void addTask(String subject, String description, String dueDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -102,6 +101,8 @@ public class MyDatabase extends SQLiteOpenHelper {
             Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //used fo rwhen the data values are updated.
     public void updateData(String row_id, String title, String description, String dueDate){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -118,6 +119,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     }
 
+    //allows other classes to read this data.
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -129,6 +131,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return cursor;
     }
 
+    //deleting one task
     public void deleteOneRow(String row_task){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_task});
@@ -139,15 +142,6 @@ public class MyDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteOneSubject(String row_subject){
-        SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(TABLESUBJECTS, "add_subject", new String[]{row_subject});
-        if(result == -1){
-            Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     void deleteAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
